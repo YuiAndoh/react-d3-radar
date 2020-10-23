@@ -12,6 +12,8 @@ type RadarCircleProps = {
   selectedVariableKey: ?string,
   color: string,
   style?: {},
+  pointRadius: number,
+  selectedPointFill: string,
 };
 
 const defaultCircleStyle = {
@@ -19,8 +21,6 @@ const defaultCircleStyle = {
   inactiveFillOpacity: 0.2,
   selectedStrokeOpacity: 1.0,
   inactiveStrokeOpacity: 0.7,
-  pointRadius: 3,
-  selectedPointFill: 'white',
   selectedPointOpacity: 1.0,
   inactivePointOpacity: 0.7,
 };
@@ -34,14 +34,15 @@ export default function RadarCircle(props: RadarCircleProps) {
     color,
     selectedVariableKey,
     style,
+    pointRadius,
+    selectedPointFill,
   } = props;
+
   const {
     selectedFillOpacity,
     inactiveFillOpacity,
     selectedStrokeOpacity,
     inactiveStrokeOpacity,
-    pointRadius,
-    selectedPointFill,
     selectedPointOpacity,
     inactivePointOpacity,
   } = {...defaultCircleStyle, ...style};
@@ -73,7 +74,11 @@ export default function RadarCircle(props: RadarCircleProps) {
                 ? selectedPointFill
                 : color
             }
-            stroke={color}
+            stroke={
+              point.variableKey === selectedVariableKey
+                ? selectedPointFill
+                : color
+            }
             cx={point.x}
             cy={point.y}
             opacity={isSelected ? selectedPointOpacity : inactivePointOpacity}

@@ -18,6 +18,8 @@ type Props = {
   height: number,
   padding: number,
   domainMax: number,
+  pointRadius: number,
+  selectedPointFill: string,
   style?: {},
   onHover?: (point: RadarPoint | null) => void,
   highlighted: ?RadarPoint,
@@ -58,6 +60,8 @@ export default function Radar(props: Props) {
     padding,
     domainMax,
     style,
+    pointRadius,
+    selectedPointFill,
     onHover,
     highlighted,
   } = props;
@@ -99,6 +103,8 @@ export default function Radar(props: Props) {
       }
       regularPoints={regularPoints}
       colors={colors}
+      pointRadius={pointRadius}
+      selectedPointFill={selectedPointFill}
     />
   );
 }

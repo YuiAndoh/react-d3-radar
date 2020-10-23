@@ -22,6 +22,8 @@ type Props = {
   highlightedPoint: ?{setKey: string, points: Array<RadarPoint>},
   regularPoints: Array<{setKey: string, points: Array<RadarPoint>}>,
   colors: {[setKey: string]: string},
+  pointRadius: number,
+  selectedPointFill: string,
 };
 
 const defaultRadarStyle = {
@@ -93,6 +95,8 @@ export default class RadarWrapper extends Component {
       regularPoints,
       backgroundScale,
       colors,
+      pointRadius,
+      selectedPointFill
     } = this.props;
     const diameter = radius * 2;
     const {axisColor, ringColor, numRings} = {...defaultRadarStyle, ...style};
@@ -150,6 +154,8 @@ export default class RadarWrapper extends Component {
                   color={colors[setKey]}
                   isSelected={false}
                   selectedVariableKey={null}
+                  pointRadius={pointRadius}
+                  selectedPointFill={selectedPointFill}
                 />
               );
             })}
@@ -165,6 +171,8 @@ export default class RadarWrapper extends Component {
                   selectedVariableKey={
                     highlighted ? highlighted.variableKey : null
                   }
+                  pointRadius={highlightedPoint.pointRadius}
+                  selectedPointFill={selectedPointFill}
                 />
                 : null
             }
